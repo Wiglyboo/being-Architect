@@ -11,7 +11,7 @@ const Portfolio: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
           <div className="max-w-3xl">
             <h2 className="text-xs font-bold tracking-[0.4em] text-brand-yellow mb-4 uppercase">Selected Works</h2>
-            <h3 className="text-4xl md:text-6xl font-display font-black leading-[1.1] tracking-tighter">
+            <h3 className="text-2xl sm:text-4xl md:text-6xl font-display font-black leading-[1.1] tracking-tighter">
               ARCHITECTURE <br /> THAT <span className="text-gray-300">TRANSFORMS</span>
             </h3>
           </div>

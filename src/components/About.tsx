@@ -127,7 +127,7 @@ const About: React.FC = () => {
 
             <div className="animate-fade-in" key={architect.id}>
               <h2 className="text-xs font-bold tracking-[0.4em] mb-4 uppercase opacity-40">The Visionary</h2>
-              <h3 className="text-4xl md:text-6xl font-display font-black leading-tight mb-8">
+              <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-display font-black leading-tight mb-8">
                 AR. <br /> {architect.name}
               </h3>
               <p className="text-2xl font-display font-bold mb-10 leading-snug">

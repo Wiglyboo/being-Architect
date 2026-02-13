@@ -8,8 +8,14 @@ body {
     background-color: #111111;
     color: #ffffff;
     overflow-x: hidden;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .reveal-on-scroll {

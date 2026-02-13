@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './layouts/Layout';
 import Home from './pages/Home';
@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import ProjectDetail from './pages/ProjectDetail';
 import Loader from './components/Loader';
+import { LoadingProvider, useLoading } from './context/LoadingContext';
 
 // ScrollToTop component to handle scroll reset on route change
 const ScrollToTop = () => {
@@ -48,29 +49,37 @@ const ScrollObserver = () => {
   return null;
 }
 
-const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true);
+const AppContent: React.FC = () => {
+  const { isLoading, setIsLoading } = useLoading();
 
   return (
-    <div className="font-sans selection:bg-brand-yellow selection:text-brand-black antialiased">
-      {isLoading ? (
-        <Loader onComplete={() => setIsLoading(false)} />
-      ) : (
-        <BrowserRouter>
-          <ScrollToTop />
-          <ScrollObserver />
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="about" element={<About />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="project/:id" element={<ProjectDetail />} />
-              <Route path="contact" element={<Contact />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      )}
+    <div className="font-sans selection:bg-brand-yellow selection:text-brand-black antialiased relative">
+      {/* Loader acts as an overlay now. It unmounts when complete. */}
+      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+
+      {/* The App is always rendered behind the loader for smooth reveal */}
+      <BrowserRouter>
+        <ScrollToTop />
+        <ScrollObserver />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="project/:id" element={<ProjectDetail />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <LoadingProvider>
+      <AppContent />
+    </LoadingProvider>
   );
 };
 

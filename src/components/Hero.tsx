@@ -1,7 +1,10 @@
 
 import React from 'react';
+import { useLoading } from '../context/LoadingContext';
 
 const Hero: React.FC = () => {
+  const { isLoading } = useLoading();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-brand-black overflow-hidden">
       {/* Background Image Showcase */}
@@ -21,19 +24,19 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-6 relative z-20 flex flex-col items-center text-center">
         <div className="reveal-clip overflow-hidden mb-8">
-          <span className="block text-brand-yellow text-xs sm:text-sm tracking-[0.6em] font-bold uppercase animate-reveal-up [animation-delay:1s]">
+          <span className={`block text-brand-yellow text-[10px] sm:text-xs md:text-sm tracking-[0.2em] sm:tracking-[0.4em] md:tracking-[0.6em] font-bold uppercase ${isLoading ? 'opacity-0 translate-y-10' : 'animate-reveal-up-slow [animation-delay:2000ms]'}`}>
             Architecture & Interior Design Studio
           </span>
         </div>
 
         <div className="reveal-clip overflow-hidden max-w-3xl">
-          <h1 className="animate-reveal-up [animation-delay:1.2s] text-3xl md:text-5xl lg:text-6xl font-display font-black text-white leading-tight">
+          <h1 className={`${isLoading ? 'opacity-0 translate-y-10' : 'animate-reveal-up-slow [animation-delay:2.3s]'} text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-black text-white leading-[1.1] tracking-tight`}>
             CRAFTING <span className="text-brand-yellow">TIMELESS</span> <br />
             SPATIAL EXPERIENCES
           </h1>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-6 opacity-0 animate-fade-in [animation-delay:1.8s]">
+        <div className={`mt-8 flex flex-col sm:flex-row justify-center gap-6 ${isLoading ? 'opacity-0' : 'animate-fade-in [animation-delay:3.0s]'}`}>
           <a
             href="#portfolio"
             className="group relative overflow-hidden bg-brand-yellow px-8 py-4 text-brand-black font-black text-xs tracking-widest transition-all"

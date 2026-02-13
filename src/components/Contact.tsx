@@ -24,18 +24,18 @@ const Contact: React.FC = () => {
 
             {/* Contact Info Side */}
             <div className="p-10 md:p-16 flex flex-col justify-between relative overflow-hidden bg-brand-black">
-              <div className="absolute top-0 right-0 p-8 text-brand-yellow/5 font-display font-black text-9xl select-none leading-none -translate-y-8 translate-x-8">
+              <div className="absolute top-0 right-0 p-8 text-brand-yellow/5 font-display font-black text-6xl md:text-9xl select-none leading-none -translate-y-4 md:-translate-y-8 translate-x-4 md:translate-x-8">
                 GO
               </div>
 
               <div className="relative z-10">
-                <h2 className="text-xs font-bold tracking-[0.4em] text-brand-yellow mb-6 uppercase">The Final Step</h2>
-                <h3 className="text-4xl md:text-5xl font-display font-black leading-[1.1] mb-10 uppercase">
+                <h2 className="text-[10px] font-bold tracking-[0.4em] text-brand-yellow mb-6 uppercase">The Final Step</h2>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black leading-[1.1] mb-8 uppercase">
                   Let's Build <br />
                   <span className="text-gray-400">Something Iconic</span>
                 </h3>
 
-                <p className="text-white/60 text-sm leading-relaxed mb-12 max-w-sm">
+                <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-sm">
                   Share your vision with us. We take on select projects to ensure every detail is crafted to perfection.
                 </p>
 

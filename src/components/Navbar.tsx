@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Logo } from './Logo';
+import { useLoading } from '../context/LoadingContext';
 
 const Navbar: React.FC = () => {
+  const { isLoading } = useLoading();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -77,18 +80,13 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled || !isHome ? 'bg-brand-black/95 backdrop-blur-md py-4 shadow-2xl' : 'bg-transparent py-8'}`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-1000 ease-out delay-500 ${isLoading ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'} ${scrolled || !isHome ? 'bg-brand-black/95 backdrop-blur-md py-3 md:py-4 shadow-2xl' : 'bg-transparent py-4 md:py-8'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="bg-brand-yellow px-4 py-1.5 text-brand-black font-black text-xl font-display tracking-tighter transition-transform group-hover:-translate-y-1">
-              BEING
-            </div>
-            <div className="text-white font-bold text-sm tracking-[0.2em] hidden sm:block transition-all group-hover:tracking-[0.3em] group-hover:text-brand-yellow uppercase">
-              Architect
-            </div>
+          <Link to="/" className="group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <Logo animate />
           </Link>
 
-          <div className="hidden md:flex gap-12 items-center">
+          <div className="hidden lg:flex gap-12 items-center">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -126,7 +124,7 @@ const Navbar: React.FC = () => {
             </a>
           </div>
 
-          <button onClick={() => setIsOpen(true)} className="md:hidden text-white hover:text-brand-yellow transition-colors">
+          <button onClick={() => setIsOpen(true)} className="lg:hidden text-white hover:text-brand-yellow transition-colors">
             <Menu size={28} />
           </button>
         </div>
@@ -134,31 +132,54 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div className={`fixed inset-0 z-[60] bg-brand-yellow transition-all duration-700 ease-[cubic-bezier(0.85,0,0.15,1)] flex flex-col ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-        <div className="p-8 flex justify-end">
+        <div className="p-6 md:p-8 flex justify-between items-center">
+          <Logo inverted />
           <button onClick={() => setIsOpen(false)} className="text-brand-black hover:rotate-90 transition-transform duration-300">
-            <X size={40} />
+            <X size={32} />
           </button>
         </div>
-        <div className="flex-grow flex flex-col items-center justify-center gap-10">
-          {navLinks.map((link, i) => (
+
+        <div className="flex-grow flex flex-col justify-center px-6 md:px-12 pb-20">
+          <div className="flex flex-col gap-6 md:gap-8 items-start">
+            {navLinks.map((link, i) => (
+              <a
+                key={link.name}
+                href={link.path}
+                onClick={(e) => {
+                  setIsOpen(false);
+                  if (link.path.startsWith('/#')) {
+                    const targetId = link.path.replace('/#', '');
+                    const element = document.getElementById(targetId);
+
+                    // If we are on home page, prevent default and scroll
+                    if (location.pathname === '/' && element) {
+                      e.preventDefault();
+                      // Small delay to allow menu close animation
+                      setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, '', link.path);
+                      }, 300);
+                    }
+                  }
+                }}
+                className={`text-4xl md:text-6xl font-display font-black text-brand-black hover:text-white transition-colors transform ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="mt-12 md:mt-16 w-full max-w-sm">
             <Link
-              key={link.name}
-              to={link.path}
+              to="/contact"
               onClick={() => setIsOpen(false)}
-              className={`text-5xl font-display font-black text-brand-black hover:text-white transition-all transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
+              className={`block w-full text-center bg-brand-black text-brand-yellow text-lg font-bold tracking-widest uppercase py-5 hover:bg-white hover:text-brand-black transition-all transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              style={{ transitionDelay: `500ms` }}
             >
-              {link.name}
+              Start Project
             </Link>
-          ))}
-          <Link
-            to="/contact"
-            onClick={() => setIsOpen(false)}
-            className={`mt-6 text-3xl font-display font-black text-brand-black border-2 border-brand-black px-8 py-3 hover:bg-brand-black hover:text-brand-yellow transition-all transform ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-            style={{ transitionDelay: `500ms` }}
-          >
-            START PROJECT
-          </Link>
+          </div>
         </div>
       </div>
     </>
