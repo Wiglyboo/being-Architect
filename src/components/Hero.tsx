@@ -6,8 +6,8 @@ const Hero: React.FC = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-brand-black overflow-hidden">
       {/* Background Image Showcase */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2400" 
+        <img
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2400"
           alt="Featured Architectural Project"
           className="w-full h-full object-cover grayscale-[0.2] opacity-60 animate-slow-zoom"
         />
@@ -26,24 +26,24 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        <div className="reveal-clip overflow-hidden max-w-4xl">
-          <h1 className="animate-reveal-up [animation-delay:1.2s] text-4xl md:text-6xl lg:text-7xl font-display font-black text-white leading-tight">
-            CRAFTING <span className="text-brand-yellow">TIMELESS</span> <br /> 
+        <div className="reveal-clip overflow-hidden max-w-3xl">
+          <h1 className="animate-reveal-up [animation-delay:1.2s] text-3xl md:text-5xl lg:text-6xl font-display font-black text-white leading-tight">
+            CRAFTING <span className="text-brand-yellow">TIMELESS</span> <br />
             SPATIAL EXPERIENCES
           </h1>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row justify-center gap-8 opacity-0 animate-fade-in [animation-delay:1.8s]">
-          <a 
-            href="#portfolio" 
-            className="group relative overflow-hidden bg-brand-yellow px-12 py-5 text-brand-black font-black text-sm tracking-widest transition-all"
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-6 opacity-0 animate-fade-in [animation-delay:1.8s]">
+          <a
+            href="#portfolio"
+            className="group relative overflow-hidden bg-brand-yellow px-8 py-4 text-brand-black font-black text-xs tracking-widest transition-all"
           >
             <span className="relative z-10">EXPLORE WORK</span>
             <div className="absolute inset-0 bg-white translate-y-full transition-transform duration-300 group-hover:translate-y-0"></div>
           </a>
-          <a 
-            href="#contact" 
-            className="group border border-white/20 px-12 py-5 text-white font-bold text-sm tracking-widest hover:border-brand-yellow hover:text-brand-yellow transition-all"
+          <a
+            href="#contact"
+            className="group border border-white/20 px-8 py-4 text-white font-bold text-xs tracking-widest hover:border-brand-yellow hover:text-brand-yellow transition-all"
           >
             START A PROJECT
           </a>

@@ -6,6 +6,18 @@ export interface Project {
   location: string;
   imageUrl: string;
   year: string;
+  description?: string;
+  gallery?: string[];
+  testimonial?: {
+    text: string;
+    clientName: string;
+    role: string;
+  };
+  details?: {
+    area: string;
+    typology: string;
+    status: string;
+  };
 }
 
 export interface ProcessStep {
